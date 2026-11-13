@@ -1,98 +1,135 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import MiBoton from '../components/MiBoton';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Inicio() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <ScrollView
+      style={styles.contenedor}
+      contentContainerStyle={styles.contenido}
+    >
+      <View style={styles.perfil}>
+        <Ionicons
+          name="person-circle"
+          size={110}
+          color="#214D80"
+        />
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+        <Text style={styles.nombre}>
+          Santiago
+        </Text>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <Text style={styles.titulo}>
+          Tecnólogo en Análisis y Desarrollo de Software
+        </Text>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <Text style={styles.institucion}>
+          SENA - CGMLTI
+        </Text>
+      </View>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <View style={styles.seccion}>
+        <Text style={styles.subtitulo}>
+          Sobre mí
+        </Text>
+
+        <Text style={styles.descripcion}>
+          Soy estudiante de Análisis y Desarrollo de
+          Software en el SENA, con interés en el
+          desarrollo de aplicaciones web y móviles.
+
+          Me gusta aprender nuevas tecnologías,
+          desarrollar proyectos de software y
+          fortalecer mis conocimientos en programación.
+        </Text>
+      </View>
+
+      <View style={styles.seccion}>
+        <Text style={styles.subtitulo}>
+          Información de contacto
+        </Text>
+
+        <MiBoton
+          textoBoton="Enviar correo"
+          colorBoton="#2563EB"
+          mensaje="Correo: ejemplo@gmail.com"
+        />
+
+        <MiBoton
+          textoBoton="Llamar"
+          colorBoton="#16A34A"
+          mensaje="Teléfono: 3001234567"
+        />
+
+        <MiBoton
+          textoBoton="Mi LinkedIn"
+          colorBoton="#7C3AED"
+          mensaje="LinkedIn: Perfil profesional"
+        />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contenedor: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F1F5F9',
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+  contenido: {
+    padding: 20,
+    paddingBottom: 35,
+  },
+  perfil: {
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    backgroundColor: '#FFFFFF',
+    padding: 25,
+    borderRadius: 15,
+    marginBottom: 20,
+    elevation: 3,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  nombre: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#214D80',
+    marginTop: 10,
   },
-  title: {
+  titulo: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#334155',
     textAlign: 'center',
+    marginTop: 8,
   },
-  code: {
-    textTransform: 'uppercase',
+  institucion: {
+    fontSize: 14,
+    color: '#64748B',
+    marginTop: 6,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  seccion: {
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 20,
+    elevation: 2,
+  },
+  subtitulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#214D80',
+    marginBottom: 12,
+  },
+  descripcion: {
+    fontSize: 15,
+    color: '#475569',
+    lineHeight: 24,
+    textAlign: 'justify',
   },
 });
