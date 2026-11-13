@@ -30,7 +30,7 @@ export default function RootLayout() {
             <Ionicons
               name="home"
               size={size}
-              color={color}
+              color={String(color)}
             />
           ),
         }}
@@ -44,7 +44,7 @@ export default function RootLayout() {
             <Ionicons
               name="school"
               size={size}
-              color={color}
+              color={String(color)}
             />
           ),
         }}
@@ -58,7 +58,7 @@ export default function RootLayout() {
             <Ionicons
               name="briefcase"
               size={size}
-              color={color}
+              color={String(color)}
             />
           ),
         }}
@@ -72,7 +72,7 @@ export default function RootLayout() {
             <Ionicons
               name="heart"
               size={size}
-              color={color}
+              color={String(color)}
             />
           ),
         }}
